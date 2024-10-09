@@ -1,12 +1,22 @@
+# Dockerfile
 FROM node:22-alpine
-WORKDIR /
+
+WORKDIR /app
+
+# Copy package.json and package-lock.json
 COPY package*.json ./
+
+# Install dependencies
 RUN npm install
 
+# Copy the rest of your application files
 COPY . .
-ARG PORT
 
-RUN npm run build
+# Prune dev dependencies
 RUN npm prune --omit=dev
+
+# Expose the application port
 EXPOSE 5000
-CMD ["node", "dist/index.js"]
+
+# Start the application
+CMD ["npm", "start"]
