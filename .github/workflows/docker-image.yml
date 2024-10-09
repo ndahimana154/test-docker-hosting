@@ -26,8 +26,8 @@ jobs:
       id: build
       run: |
         TAG=$(date +%s)
-        docker build . --file Dockerfile --tag test:$TAG
+        docker build . --file Dockerfile --tag my-image-name:$TAG
         echo "TAG=$TAG" >> $GITHUB_ENV
 
     - name: Push the Docker image to Docker Hub
-      run: docker push test:$TAG
+      run: docker push my-image-name:$TAG
