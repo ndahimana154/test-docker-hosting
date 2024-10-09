@@ -23,7 +23,11 @@ jobs:
         password: ${{ secrets.DOCKER_HUB_TOKEN }}      # Add your Docker Hub token in GitHub secrets
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      id: build
+      run: |
+        TAG=$(date +%s)
+        docker build . --file Dockerfile --tag my-image-name:$TAG
+        echo "TAG=$TAG" >> $GITHUB_ENV
 
     - name: Push the Docker image to Docker Hub
-      run: docker push my-image-name:$(date +%s)
+      run: docker push my-image-name:$TAG
