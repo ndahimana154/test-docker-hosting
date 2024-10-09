@@ -30,4 +30,4 @@ jobs:
         echo "TAG=$TAG" >> $GITHUB_ENV
 
     - name: Push the Docker image to Docker Hub
-      run: docker push my-image-name:$TAG
+      run: docker push test:$TAG
